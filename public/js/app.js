@@ -2,6 +2,7 @@
     var app = angular.module('pokedex', []);
 
     app.controller('PokemonController', function () {
+
         this.pokemon = {
             id: "001",
             name: "Bulbasaur",
@@ -21,6 +22,16 @@
             },
             evolution: ["Bulbasaur", "Ivysaur", "Venusaur"]
         };
+
+
     });
+
+    app.controller('TabsController', function () {
+        this.tab = 1;
+
+        this.selectTab = function (tab) {
+            this.tab = tab;
+        }
+    })
 
 })();
