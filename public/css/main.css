@@ -19,12 +19,12 @@ body {
     margin-bottom: 10px;
 }
 
-.type {
-    margin-left: 1px;
+.form-group {
+    padding: 10px;
 }
 
-.form-grou {
-    padding: 10px;
+.type {
+    margin-left: 1px;
 }
 
 .type-normal {
@@ -117,5 +117,12 @@ body {
     border: solid 1px #9b6470;
 }
 
+.ng-invalid.ng-dirty {
+    border-color: #D9230F;
+}
+
+.ng-valid.ng-dirty {
+    border-color: #468847;
+}
 
 

@@ -2,15 +2,14 @@
     var app = angular.module('pokedex', []);
 
     app.controller('PokemonController', function () {
-
         this.pokemon = {
             id: "001",
             name: "Bulbasaur",
             species: "Seed Pokémon",
-            type: ["Grass", "Poison"],
+            type: [ "Grass", "Poison" ],
             height: "2′4″ (0.71m)",
             weight: "15.2 lbs (6.9 kg)",
-            abilities: ["Overgrow", "Chlorophyll"],
+            abilities: [ "Overgrow", "Chlorophyll" ],
             stats: {
                 hp: 45,
                 attack: 49,
@@ -20,9 +19,8 @@
                 speed: 45,
                 total: 318
             },
-            evolution: ["Bulbasaur", "Ivysaur", "Venusaur"]
+            evolution: [ "Bulbasaur", "Ivysaur", "Venusaur" ]
         };
-
 
     });
 
@@ -31,23 +29,86 @@
 
         this.selectTab = function (tab) {
             this.tab = tab;
-        }
+        };
+
     });
 
-    app.controller('CommentsController', function () {
-        this.comments = [];
-        this.show = false;
-
-        this.toggle = function () {
-            this.show = !this.show;
-        }
-
-    })
     app.filter('imageify', function () {
         return function (input) {
             var url = "img/pokemons/" + input.toLowerCase() + ".jpg";
             return url;
+        };
+    });
+
+    app.directive('pokemonData', function () {
+        return {
+            restrict: 'E',
+            templateUrl: 'partials/pokemon-data.html'
         }
-    })
+    });
+
+    app.directive('pokemonEvolution', function () {
+        return {
+            restrict: 'E',
+            templateUrl: 'partials/pokemon-evolution.html'
+        }
+    });
+
+    app.directive('pokemonImage', function () {
+        return {
+            restrict: 'E',
+            templateUrl: 'partials/pokemon-image.html'
+        }
+    });
+
+    app.directive('pokemonName', function () {
+        return {
+            restrict: 'E',
+            templateUrl: 'partials/pokemon-name.html'
+        }
+    });
+
+    app.directive('pokemonStats', function () {
+        return {
+            restrict: 'E',
+            templateUrl: 'partials/pokemon-stats.html'
+        }
+    });
+
+    app.directive('pokemonNav', function () {
+        return {
+            restrict: 'E',
+            templateUrl: 'partials/pokemon-nav.html'
+        }
+    });
+
+    app.directive('pokemonComments', function () {
+        return {
+            restrict: 'E',
+            templateUrl: 'partials/pokemon-comments.html',
+            controller : function () {
+                this.comments = [];
+                this.comment = {};
+                this.show = false;
+
+                this.toggle = function () {
+                    this.show = !this.show;
+                };
+
+                this.anonymousChanged = function () {
+                    if (this.comment.anonymous) {
+                        this.comment.email = "";
+                    }
+                };
+
+                this.addComment = function () {
+                    this.comment.date = Date.now();
+                    this.comments.push(this.comment);
+                    this.comment = [];
+                }
+            },
+            controllerAs : 'cmtsCtrl'
+        }
+    });
 
 })();
