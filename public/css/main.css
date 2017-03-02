@@ -19,12 +19,12 @@ body {
     margin-bottom: 10px;
 }
 
-.type {
-    margin-left: 1px;
+.form-group {
+    padding: 10px;
 }
 
-.form-grou {
-    padding: 10px;
+.type {
+    margin-left: 1px;
 }
 
 .type-normal {
