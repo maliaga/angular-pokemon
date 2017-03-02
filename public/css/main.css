@@ -23,6 +23,10 @@ body {
     margin-left: 1px;
 }
 
+.form-grou {
+    padding: 10px;
+}
+
 .type-normal {
     background-color: #a8a878;
     border: solid 1px #6d6d4e;
