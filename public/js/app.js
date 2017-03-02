@@ -49,7 +49,9 @@
         };
 
         this.addComment = function () {
-            this.comments.push(this.comment)
+            this.comment.date = Date.now();
+            this.comments.push(this.comment);
+            this.comment = [];
         }
 
     });
@@ -59,6 +61,13 @@
             var url = "img/pokemons/" + input.toLowerCase() + ".jpg";
             return url;
         };
+    });
+
+    app.directive('pokemonData', function () {
+        return {
+            restrict: 'E',
+            templateUrl: 'partials/pokemon-data.html'
+        }
     });
 
 })();

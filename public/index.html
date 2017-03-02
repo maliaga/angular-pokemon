@@ -49,32 +49,7 @@
                 <div class="tab-content">
                     <!-- Pokedex -->
                     <div ng-show="tabs.tab === 1">
-                        <ul class="list-group">
-                            <li class="list-group-item">
-                                <strong>Type</strong>
-                                <span class="pull-right">
-                      <span class="label type type-{{type | lowercase}}" ng-repeat="type in pkmCtrl.pokemon.type">
-                        {{type}}
-                      </span>
-                    </span>
-                            </li>
-                            <li class="list-group-item">
-                                <strong>Height</strong>
-                                <span class="pull-right">{{pkmCtrl.pokemon.height}}</span>
-                            </li>
-                            <li class="list-group-item">
-                                <strong>Weight</strong>
-                                <span class="pull-right">{{pkmCtrl.pokemon.weight}}</span>
-                            </li>
-                            <li class="list-group-item">
-                                <strong>Abilities</strong>
-                                <ul>
-                                    <li ng-repeat="ability in pkmCtrl.pokemon.abilities">
-                                        {{ability}}
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
+                        <pokemon-data></pokemon-data>
                     </div>
                     <!-- Stats -->
                     <div ng-show="tabs.tab === 2">
@@ -133,13 +108,13 @@
                     <h1 class="panel-title">Comments <button class="close pull-right" ng-click="cmtsCtrl.toggle()">&times;</button></h1>
                 </div>
                 <div class="panel-body">
-                    <form class="form-horizontal" role="form" ng-submit="cmtsCtrl.addComment()">
+                    <form name="commentsForm" class="form-horizontal" role="form" ng-submit="commentsForm.$valid && cmtsCtrl.addComment()" novalidate>
                         <div class="form-group">
                             <div class="col-sm-6">
-                                <textarea ng-model="cmtsCtrl.comment.body" placeholder="Please tell us what you think about {{pkmCtrl.pokemon.name}}" class="form-control"></textarea>
+                                <textarea ng-model="cmtsCtrl.comment.body" placeholder="Please tell us what you think about {{pkmCtrl.pokemon.name}}" class="form-control" required></textarea>
                             </div>
                             <div class="col-sm-4">
-                                <input ng-model="cmtsCtrl.comment.email" ng-disabled="cmtsCtrl.comment.anonymous" type="email" placeholder="Please enter your email address" class="form-control">
+                                <input ng-model="cmtsCtrl.comment.email" ng-disabled="cmtsCtrl.comment.anonymous" type="email" placeholder="Please enter your email address" class="form-control" ng-required="!cmtsCtrl.comment.anonymous">
                                 <label>
                                     <input ng-model="cmtsCtrl.comment.anonymous" ng-change="cmtsCtrl.anonymousChanged()" type="checkbox">
                                     Anonymous
@@ -156,7 +131,7 @@
                             Comment by
                             <a ng-if="!comment.anonymous" href="mailto:{{comment.email}}">{{comment.email}}</a>
                             <em ng-if="comment.anonymous">Anonymous</em>
-                            on <span>{{comment.date}}</span>
+                            on <span>{{comment.date | date : 'medium'}}</span>
                         </footer>
                     </blockquote>
                 </div>
